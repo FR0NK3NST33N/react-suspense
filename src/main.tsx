@@ -2,14 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
-const queryClient = new QueryClient();
+const client = new ApolloClient({
+  uri: "https://beta.pokeapi.co/graphql/v1beta",
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+    <ApolloProvider client={client}>
       <App />
-    </QueryClientProvider>
+    </ApolloProvider>
   </React.StrictMode>
 );
